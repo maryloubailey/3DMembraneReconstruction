@@ -5,17 +5,17 @@ function [ img ] = grabImage( obj, channelname, iframe, istack )
 
 %%
 if isa(channelname,'char')
-    channelID=(strcmp(channelname,{obj.channels.label}));
+    channelID=(strcmp(channelname,{obj.channels.label})); %compare channel name to channel label, return 1 if same
 elseif isa(channelname,'numeric')
     channelID=channelname;
 else
     error('unsupported channelname type');
 end
 
-if sum(channelID)==0
+if sum(channelID)==0 
     error('channel name not found');
 else
-    img=double(obj.mov{channelID}{istack+obj.numstacks*(iframe-1)})./obj.illuminationcorrection;
+    img=double(obj.mov{channelID}{istack+obj.numstacks*(iframe-1)})./obj.illuminationcorrection; %
 end
 
 end

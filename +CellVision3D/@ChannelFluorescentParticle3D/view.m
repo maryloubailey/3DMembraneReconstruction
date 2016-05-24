@@ -9,6 +9,6 @@ CellVision3D.Image2D.view(img);
 hold on;
 for ip=1:length(obj.particles)
     cnt=obj.particles(ip).getCentroid;
-    plot(cnt(1),cnt(2),'or');
+    plot(cnt(1),cnt(2),'or'); %plot circles
 end
 end

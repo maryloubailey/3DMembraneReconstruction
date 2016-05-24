@@ -3,13 +3,13 @@ function [ channeltypes, channelclassnames,descriptions ] = getChannelTypes(  )
 % 3/27/2016 Yao Zhao
 
 %% class meta data of movie
-meta=metaclass(CellVision3D.HObject);
-packagemeta=meta.ContainingPackage;
-classlist = packagemeta.ClassList;
-classnames = {classlist.Name};
+meta=metaclass(CellVision3D.HObject); %class
+packagemeta=meta.ContainingPackage;   %package: classlist, functionlist, packagelist
+classlist = packagemeta.ClassList;    %class array with properties
+classnames = {classlist.Name};        %1x48 class list, i.e. CellVision3D.Movie, CellVision3D.HObject
 channelclassnames = ...
-    classnames(cellfun(@(x)~isempty(strfind(x,'CellVision3D.Channel')),classnames));
-channeltypes=cellfun(@(x)x(21:end),channelclassnames,'UniformOutput',0);
+    classnames(cellfun(@(x)~isempty(strfind(x,'CellVision3D.Channel')),classnames)); %make cell of only the channel class names from the initial cell, classnames
+channeltypes=cellfun(@(x)x(21:end),channelclassnames,'UniformOutput',0); %cell of channel types
 channeltypes{strcmp(channeltypes,'')}='None';
 descriptions=cell(size(channeltypes));
 

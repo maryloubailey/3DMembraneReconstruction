@@ -16,7 +16,7 @@ classdef Movie < CellVision3D.HObject
         
             % data information
         numchannels % number of channels
-        channels % channel handles
+        channels % channel handles/pointers
     end
     
     properties (SetAccess = public)

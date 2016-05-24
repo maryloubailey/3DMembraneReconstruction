@@ -9,14 +9,17 @@ function [ obj ] = setChannels( obj, varargin )
 
 % check input format
 n=nargin-1;
-if mod(n,2)==1
-    error('wrong number of input');
+if mod(n,2)==1 %must have even number of inputs
+    error('wrong number of inputs');
 end
 % initialize
 obj.numchannels=n/2;
-channels=repmat(CellVision3D.Channel.empty,1,n/2);
+channels=repmat(CellVision3D.Channel.empty,1,n/2); %0x0 Channel array with
+%properties: label, type,numframes, numstacks, sizeX, sizeY, sizeZ, pix2um,
+%data, illuminationcorrection, zxr
+
 for ichannel=1:obj.numchannels
-    tmptype=varargin{2*ichannel-1};
+    tmptype=varargin{2*ichannel-1}; %loop through varargin
 
     % get types of channels
     [types,classnames,descr]=CellVision3D.Channel.getChannelTypes();
@@ -52,7 +55,7 @@ for ichannel=1:obj.numchannels
 %                 ['cannot find the channel type ',tmptype]));
 %     end
 end
-obj.channels=channels;
+obj.channels=channels; %array with info
 
 end
 

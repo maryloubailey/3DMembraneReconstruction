@@ -42,7 +42,7 @@ classdef Channel < CellVision3D.HObject  & matlab.mixin.Heterogeneous & ...
         end
         %grab image
         function img=grabImage(obj,iframe,istack)
-            img=double(obj.data{istack+obj.numstacks*(iframe-1)});
+            img=double(obj.data{istack+obj.numstacks*(iframe-1)});%
             if ~isempty(obj.illuminationcorrection)
                 img=img./obj.illuminationcorrection;
             end
@@ -50,8 +50,8 @@ classdef Channel < CellVision3D.HObject  & matlab.mixin.Heterogeneous & ...
         %grab image 3d
         function img=grabImage3D(obj,iframe)
             img=zeros(obj.sizeY,obj.sizeX,obj.sizeZ);
-            for istack=1:obj.numstacks
-                img(:,:,istack)=double(obj.data{istack+obj.numstacks*(iframe-1)});
+            for istack=1:obj.numstacks %loop through each stack
+                img(:,:,istack)=double(obj.data{istack+obj.numstacks*(iframe-1)});%
                 if ~isempty(obj.illuminationcorrection)
                     img(:,:,istack)=img(:,:,istack)./obj.illuminationcorrection;
                 end
@@ -64,7 +64,7 @@ classdef Channel < CellVision3D.HObject  & matlab.mixin.Heterogeneous & ...
                 img=img+double(obj.data{istack+obj.numstacks*(iframe-1)});
             end
             img=img/obj.numstacks;
-            if ~isempty(obj.illuminationcorrection)
+            if ~isempty(obj.illuminationcorrection) %illumination correction from .mat file, gives uniform brightness
                 img=img./obj.illuminationcorrection;
             end
         end

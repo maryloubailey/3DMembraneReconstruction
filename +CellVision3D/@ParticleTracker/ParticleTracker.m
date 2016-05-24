@@ -18,9 +18,9 @@ classdef ParticleTracker < CellVision3D.HObject
     methods
         % constructor
         function obj=ParticleTracker(varargin)
-            n=floor(nargin/2);
+            n=floor(nargin/2); %numer of arguments / 2
             for i=1:n
-                obj.(varargin{2*i-1})=varargin{2*i};
+                obj.(varargin{2*i-1})=varargin{2*i}; %shift arguments
             end
         end
 

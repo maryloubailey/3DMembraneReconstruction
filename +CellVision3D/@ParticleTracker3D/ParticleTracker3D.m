@@ -19,9 +19,9 @@ classdef ParticleTracker3D < CellVision3D.ParticleTracker ...
     
     methods 
         % get particle peak positions
-        pk=getPositions(obj,zstack,varargin)
+        pk=getPositions(obj,zstack,varargin) %getPositions in @ParticleTracker3D
         % fit particles to gaussian, fit particles to a image
-        [param2,resnorm]=fitPositions(obj,img3,pcnt,varargin)
+        [param2,resnorm]=fitPositions(obj,img3,pcnt,varargin) %fitPositions in @ParticleTracker3D
         
     end
     
