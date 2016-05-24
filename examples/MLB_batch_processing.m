@@ -1,4 +1,5 @@
 %% setting up and load movie
+%cen2
 clear all;close all;clc;
 addpath('./bioformats');
 % select movie file
@@ -7,7 +8,7 @@ dirpaths={...
     ...'C:\Users\Yao\Google Drive\Movie for analysis\particle_correlation_movies\ade8',...
     ...'C:\Users\Yao\Google Drive\Movie for analysis\particle_correlation_movies\cen2',...
     ...'C:\Users\Yao\Google Drive\Movie for analysis\particle_correlation_movies\rap1',...
-    'C:\Users\maryloubailey\3DMembraneReconstruction\ParticleTracking'...
+    'C:\Users\maryloubailey\Google Drive\Movie for analysis\particle_correlation_movies\cen2'...
     };
 for idir = 1:length(dirpaths) %loop through all directory paths, in this case, only one 
     dirpath=dirpaths{idir}; %set dirpath to the directory path in specified cell
@@ -16,7 +17,7 @@ for idir = 1:length(dirpaths) %loop through all directory paths, in this case, o
     files = dir(fullfile(dirpath,'*.dv')); %get .dv file (info) specified in dirpath
     filenames={files.name}; %get .dv filename
     % par for ifile=1:length(filenames);
-    for ifile=1:length(filenames); %parse through .dv files, in this case only one
+    for ifile=2:length(filenames); %parse through .dv files, in this case only one
         movie=CellVision3D.Movie(fullfile(dirpath,filenames{ifile})); %sets up movie parameters for specific file, [] initially empty
         % display all possible channel types
         display(CellVision3D.Channel.getChannelTypes()) %packagename.classname.name; displays 'types'
@@ -25,8 +26,8 @@ for idir = 1:length(dirpaths) %loop through all directory paths, in this case, o
         %movie.setChannels sets channel names and types, doesn't output
         %properties?
         movie.setChannels('FluorescentParticle3D','loci',...
-            'FluorescentParticle3D','SPB',...
-            'None','cell body')
+            'FluorescentParticle3D','SPB'...
+           )
         % load movie to RAM
         movie.load(200) %shows movie parameters also
          
@@ -41,9 +42,9 @@ for idir = 1:length(dirpaths) %loop through all directory paths, in this case, o
         % reset minimum distance between particles
         channel1.mindist = 3;
         % initialize the movie - particle3d array with properties
-        particle1 = channel1.init(1) %init comes from the type of channel - in this case, ChannelFluorescentParticle3D
+        particle1 = channel1.init(1)
         % preview channel - figure
-        channel1.view() %view comes from the type of channel - in this case, ChannelFluorescentParticle3D
+        channel1.view()
         
         %% initialize channel 2
         figure
@@ -52,7 +53,7 @@ for idir = 1:length(dirpaths) %loop through all directory paths, in this case, o
         % set the size of object to 100
         channel2.lobject=3;
         % reset peak threshold, some of the particles are really dim,
-        channel2.peakthreshold = .3;
+        channel2.peakthreshold = .2;
         % reset minimum distance between particles
         channel2.mindist = 3;
         % initialize the movie
@@ -76,11 +77,11 @@ for idir = 1:length(dirpaths) %loop through all directory paths, in this case, o
         %% construct cell
         % construct the cell only by membrane
         cells = CellVision3D.CellConstructor.constructCellsByParticles(particle1,particle2,15);
-        % % set filters to only select cells with two lacO found
-%         filter=CellVision3D.CellFilter('loci','FluorescentParticle3D_number',[1 1],...
-%             'SPB','FluorescentParticle3D_number',[1 1]);
-        % apply filtter
-%         cells=filter.applyFilter(cells);
+        % set filters to only select cells with two lacO found
+        filter=CellVision3D.CellFilter('loci','FluorescentParticle3D_number',[1 1],...
+            'SPB','FluorescentParticle3D_number',[1 1]);
+%         apply filtter
+        cells=filter.applyFilter(cells);
         % view result
         figure
         movie.view(cells);
@@ -103,7 +104,7 @@ dirpaths={...
     ...'C:\Users\Yao\Google Drive\Movie for analysis\particle_correlation_movies\cut3',...
     ...'C:\Users\Yao\Google Drive\Movie for analysis\particle_correlation_movies\ade8',...
     ...'C:\Users\Yao\Google Drive\Movie for analysis\particle_correlation_movies\cen2',...
-    'C:\Users\Yao\Google Drive\Movie for analysis\particle_correlation_movies\rap1',...
+    'C:\Users\maryloubailey\Google Drive\Movie for analysis\particle_correlation_movies\cen2',...
     };
 for idir = 1:length(dirpaths)
     dirpath=dirpaths{idir};

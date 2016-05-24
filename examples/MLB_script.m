@@ -5,12 +5,13 @@
 addpath('./bioformats');
 clear all;clc;close all
 % select movie file
-movie=CellVision3D.Movie('sample_image.dv');
+movie=CellVision3D.Movie('clo3_GFP_01_R3D.dv');
 % set channels
 movie.setChannels('FluorescentParticle3D','lacO',...
     'FluorescentMembrane3DSpherical','cut11');
 % load movie to RAM
 movie.load();
+
 %% initialize lacO channel
 % get channel
 channel1 = movie.getChannel('lacO');
